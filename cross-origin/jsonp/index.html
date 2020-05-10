@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>JSONP</title>
+	</head>
+	<body>
+		<h1>JSONP实现</h1>
+		<script>
+			function jsonpcallback(data) {
+				console.log('jsonp data: ', data);
+			}
+
+			function jsonp() {
+				let script = document.createElement('script');
+				script.src = 'http://localhost:3002?callback=jsonpcallback';
+				document.body.appendChild(script);
+			}
+
+			jsonp();
+		</script>
+	</body>
+</html>

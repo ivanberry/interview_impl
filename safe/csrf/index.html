@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>信任网站</title>
+	</head>
+	<body>
+		<h1>这是一个信任网站，用户会主动登录</h1>
+		<script>
+			// const URL = 'localhost:3004/login';
+			const URL = 'interview.local.cn/api/login';
+			fetch(`http://${URL}`, {
+				credentials: 'include',
+				mode: 'no-cors',
+			}).then((res) => console.log(res));
+		</script>
+	</body>
+</html>

