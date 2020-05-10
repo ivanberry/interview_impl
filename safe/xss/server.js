@@ -4,6 +4,7 @@ const server = http.createServer((req, res) => {
 	res.setHeader('Access-Control-Allohhw-Origin', '*');
 	res.writeHead(200, { 'Content-Type': 'text/html' });
 	res.write('<script>alert(1)</script>');
+	res.end();
 });
 
 server.listen(3003, () => {
