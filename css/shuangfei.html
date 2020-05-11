@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>双飞燕布局</title>
+		<style>
+			section {
+				min-height: 200px;
+			}
+			.left {
+				width: 200px;
+				background-color: aliceblue;
+			}
+			.right {
+				width: 300px;
+				background-color: antiquewhite;
+			}
+			.main {
+				background-color: beige;
+			}
+
+			.basic .main,
+			.basic .left,
+			.basic .right {
+				float: left;
+			}
+
+			.basic .main {
+				width: 100%;
+			}
+
+			.basic .main-inner {
+				margin-left: 200px;
+				margin-right: 300px;
+			}
+
+			.basic .left {
+				margin-left: -100%;
+			}
+
+			.bsic .right {
+				margin-left: -300px;
+			}
+
+			.flex {
+				display: flex;
+			}
+
+			.flex .left,
+			.flex .right {
+				flex: 0 0 25vw;
+			}
+
+			.flex .main {
+				margin: auto;
+				flex: 1;
+			}
+
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>双飞燕布局</h1>
+		<!-- <main id="basic" class="basic">
+			<h2>基础布局</h2>
+			<button id="baisc_toggle">切换Basic布局</button>
+			<section class="main"><div class="main-inner">中心区</div></section>
+			<section class="left">left</section>
+			<section class="right">right</section>
+		</main> -->
+
+		<main class="flex" id="flex">
+			<section class="left">left</section>
+			<section class="main">main</section>
+			<section class="right">right</section>
+		</main>
+	</body>
+</html>

@@ -4,8 +4,52 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>圣杯布局</title>
+		<style>
+			.left,
+			.right,
+			.main {
+				min-height: 300px;
+			}
+			.left {
+				width: 200px;
+				background-color: thistle;
+			}
+			.main {
+				background-color: #999;
+			}
+			.right {
+				width: 300px;
+				background-color: violet;
+			}
+			.left,
+			.right,
+			.main {
+				float: left;
+				position: relative;
+			}
+			.main {
+				width: 100%;
+			}
+			.container {
+				padding-left: 200px;
+				padding-right: 300px;
+			}
+			.left {
+				margin-left: -100%;
+				left: -100px;
+			}
+			.right {
+				margin-right: -300px;
+				right: -300px;
+			}
+		</style>
 	</head>
 	<body>
-		<h2>圣杯布局</h2>
+		<h2>三栏布局之：圣杯布局</h2>
+		<main class="container">
+			<section class="main">main</section>
+			<section class="left">left</section>
+			<section class="right">right</section>
+		</main>
 	</body>
 </html>
