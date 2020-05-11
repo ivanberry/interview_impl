@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>双飞燕布局</title>
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+			main,
+			section {
+				height: calc(100vh - 45px - 2px);
+			}
+			.title {
+				height: 45px;
+				line-height: 45px;
+				margin: 0;
+			}
+			.left {
+				border: 1px solid red;
+				float: left;
+				width: 200px;
+			}
+			.right {
+				border: 1px solid green;
+				/* margin padding百分比值是相当于父级容器宽度 */
+				margin-left: 200px;
+				width: calc(100vw - 200px -2px);
+			}
+		</style>
+	</head>
+	<body>
+		<h2 class="title">双飞燕布局，即经典两栏布局</h2>
+		<main>
+			<section class="left">
+				<h3>left part</h3>
+			</section>
+			<section class="right">
+				<h3>right part</h3>
+			</section>
+		</main>
+	</body>
+</html>
