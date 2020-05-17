@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>原型，原型链及继承</title>
+	</head>
+	<body>
+		<h1>打开控制台，定义一个对象，然后查看它的原型。</h1>
+		<script>
+			(function () {
+				Object.defineProperty(Object.prototype, '__proto__', {
+					get() {
+						console.log('you call the __proto__');
+						return 0;
+					},
+					set(val) {
+						console.log('you set value');
+						Object.setPrototypeOf(this, val);
+					},
+				});
+			})();
+
+			// 构造函数的实现
+			function _new(ctor, ...args) {
+				const res = {};
+				if (ctor.prototype !== null) {
+					res.__proto__ = ctor.prototype;
+				}
+				const ret = ctor.apply(res, args);
+				if (
+					ret !== null &&
+					(typeof ret === 'object' || typeof ret === 'function')
+				) {
+					return ret;
+				}
+				return res;
+			}
+
+			// 继承
+			// 1. 组合继承
+			// 2. 寄生组合继承
+			// 3. ES6继承
+		</script>
+	</body>
+</html>
