@@ -3,10 +3,52 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script defer src="./array.js"></script>
+		<script defer src="./closure.js"></script>
+		<script defer src="./functions.js"></script>
+		<script defer src="./dataType.js"></script>
+		<script defer src="./object.js"></script>
 		<title>原型，原型链及继承</title>
 	</head>
 	<body>
 		<h1>打开控制台，定义一个对象，然后查看它的原型。</h1>
+		<button id="button">防止重复提交</button>
+
+		<input type="text" oninput="" />
+		<script>
+			function debounce(fn, delay) {
+				let timer = 0;
+				return function () {
+					const args = arguments;
+					if (timer) clearTimeout(timer);
+					timer = setTimeout(() => {
+						fn && fn.apply(this, args);
+					}, delay);
+				};
+			}
+
+			function throttle(fn, threshold) {
+				let timer = 0,
+					last = new Date();
+				return function (...args) {
+					let now = new Date();
+					clearTimeout(timer);
+					if (now - last > threshold) {
+						// 当两次运行超过时间阈值后，保证执行
+						fn && fn.apply(this, args);
+						last = now;
+					} else {
+						//  now - last < threshold内，可以看成了防抖
+						timer = setTimeout(() => {
+							fn && fn.apply(this, args);
+						}, threshold);
+					}
+				};
+			}
+			const btn = document.getElementById('button');
+			const fn = debounce(() => console.log('xxx'), 200);
+			btn.addEventListener('click', fn);
+		</script>
 		<script>
 			(function () {
 				Object.defineProperty(Object.prototype, '__proto__', {

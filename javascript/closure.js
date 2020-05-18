@@ -1,5 +1,3 @@
-import { setupMaster } from 'cluster';
-
 var data = [];
 
 for (var i = 0; i < 3; i++) {
