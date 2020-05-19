@@ -9,6 +9,7 @@
 		<script defer src="./dataType.js"></script>
 		<script defer src="./object.js"></script>
 		<script defer src="./curry.js"></script>
+		<script defer src="./call-apply-bind.js"></script>
 		<script defer src="./index.js"></script>
 		<title>原型，原型链及继承</title>
 	</head>
@@ -16,6 +17,9 @@
 		<h1>打开控制台，定义一个对象，然后查看它的原型。</h1>
 		<button id="button">防止重复提交</button>
 
+		<h2>fetch中断模拟</h2>
+		<button onclick="request">利用fetch发起请求</button>
+		<button onclick="abortFetch">中断模拟</button>
 		<input type="text" oninput="" />
 		<script>
 			function debounce(fn, delay) {
