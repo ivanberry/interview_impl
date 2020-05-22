@@ -26,8 +26,8 @@ function deepClone(source, hash = new WeakMap()) {
 	if (typeof source === 'object') {
 		target = Array.isArray(source) ? [] : {};
 		hash.set(source, target);
-		for (let [key, value] in Object.entries(source)) {
-			target[key] = deepClone(value, hash);
+		for (let key in source) {
+			target[key] = deepClone(source[key], hash);
 		}
 	} else {
 		target = source;
