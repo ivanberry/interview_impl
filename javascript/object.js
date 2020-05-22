@@ -23,7 +23,7 @@ function deepClone(source, hash = new WeakMap()) {
 		return hash.get(source);
 	}
 
-	if (typeof source === 'object') {
+	if (source !== null && typeof source === 'object') {
 		target = Array.isArray(source) ? [] : {};
 		hash.set(source, target);
 		for (let key in source) {
