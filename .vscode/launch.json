@@ -7,6 +7,13 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "Launch CORS Test Server",
+			"program": "${workspaceFolder}/server/index.js",
+			"skipFiles": ["<node_internals>/**"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "Launch Program",
 			"skipFiles": ["<node_internals>/**"],
 			"program": "${workspaceFolder}/safe/xss/server.js"

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Nginx 跨域处理</title>
+	</head>
+	<body>
+		<h1>Nginx 跨域处理</h1>
+		<h2>数据返回：<span id="res"></span></h2>
+		<script>
+			// const URL = 'http://interview.local.cn/api/info';
+			const URL = 'http://api.local.cn/info';
+			const xhr = new XMLHttpRequest();
+			xhr.open('put', URL, true);
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					const resDom = document.getElementById('res');
+					resDom.innerHTML = xhr.responseText;
+				}
+			};
+			xhr.send(null);
+		</script>
+	</body>
+</html>
