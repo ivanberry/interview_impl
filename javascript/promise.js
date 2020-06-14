@@ -1,87 +1,93 @@
-const PENDING = 0;
-const FULFILLED = 1;
-const REJECTED = 2;
+const PENDING = 'pending';
+const RESOLVE = 'resolve';
+const REJECT = 'reject';
 
-function newPromise(fn) {
-	// 状态
-	var state = PENDING;
+function get(url) {
+	return new Promise((resolve, reject) => {
+		const xhr = new XMLHttpRequest();
+		xhr.open('get', url);
 
-	// 值存储
-	var value = null;
-
-	// .then/.done的处理函数
-	var handlers = [];
-
-	// 基本状态切换
-	function fulfill(result) {
-		state = FULFILLED;
-		value = result;
-	}
-
-	// 基本状态切换
-	function reject(error) {
-		state = REJECTED;
-		value = error;
-	}
-
-	// high-level transition function
-	// 这个高阶的状态切换函数有什么用啊？？？再看看文字把
-	/**
-	 *
-	 * @param {Promise/plain value} result
-	 */
-	function resolve(result) {
-		try {
-			var then = getThen(result);
-			if (then) {
-				doResolve(then.bind(result), resolve, reject);
-				return;
+		xhr.onreadystatechange(() => {
+			if (xhr.status === 200 && xhr.readyState === 4) {
+				resolve(xhr.response);
+			} else {
+				reject(new Error(xhr.responseText));
 			}
-			fulfill(result);
-		} catch (e) {
-			reject(e);
-		}
-	}
+		});
 
-	// helper function
-	/**
-	 * Check if a value is a Promise and, if it is,
-	 * return the 'then' method of that promise
-	 * @param {Promis/Any} value
-	 * @returns {Function/Null}
-	 */
-	function getThen(value) {
-		var t = typeof value;
-		if (value && (t === 'object' || t === 'function')) {
-			var then = value.then;
-			if (typeof then === 'function') {
-				return then;
-			}
-		}
-		return null;
-	}
+		xhr.onerror = function () {
+			reject(new Error('Network Error'));
+		};
 
-	function doResolve(fn, onFulfilled, onRejected) {
-		var done = false;
-		try {
-			fn(
-				function (value) {
-					if (done) return;
-					done = true;
-					onFulfilled(value);
-				},
-				function (reason) {
-					if (done) return;
-					done = true;
-					onRejected(reason);
-				}
-			);
-		} catch (error) {
-			if (done) return;
-			done = true;
-			onRejected(error);
-		}
-	}
-
-	doResolve(fn, resolve, reject);
+		xhr.send();
+	});
 }
+function Promise(executor) {
+	var self = this;
+	self.status = PENDING;
+	self.onResolvedCallback = [];
+	self.onRejectedCallback = [];
+
+	function resolve(value) {
+		if (self.status === PENDING) {
+			self.status = RESOLVE;
+			self.data = value;
+			for (let i = 0; i < self.onResolvedCallback.length; i++) {
+				self.onResolvedCallback[i](value);
+			}
+		}
+	}
+
+	function reject(reason) {
+		if (self.status === PENDING) {
+			self.status = REJECT;
+			self.data = reason;
+			for (let i = 0; i < self.onRejectedCallback.length; i++) {
+				self.onRejectedCallback[i](reason);
+			}
+		}
+	}
+
+	try {
+		executor(resolve, reject);
+	} catch (e) {
+		reject(e);
+	}
+}
+
+Promise.prototype.then = function (onResolved, onRejected) {
+	var self = this;
+	onRejected = typeof onRejected === 'function' ? onRejected : function (v) {};
+	onResolved = typeof onResolved === 'function' ? onResolved : function (V) {};
+
+	if (self.status === RESOLVE) {
+		return new Promise((resovle, reject) => {
+			try {
+				const x = onResolved(self.data);
+				if (x instanceof Promise) {
+					x.then(resovle, reject);
+				}
+				resovle(x);
+			} catch (e) {
+				reject(e);
+			}
+		});
+	}
+
+	if (self.status === REJECT) {
+		return new Promise((resolve, reject) => {
+			try {
+				const x = onRejected(self.data);
+				if (x instanceof Promise) {
+					x.then(resolve, reject);
+				}
+			} catch (e) {
+				reject(e);
+			}
+		});
+	}
+
+	if (self.status === PENDING) {
+		return new Promise((resolve, reject) => {});
+	}
+};

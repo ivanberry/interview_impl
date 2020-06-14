@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>盒子模型</title>
+		<style>
+			:root {
+				--color-1: red;
+				--color-2: green;
+				--color-3: pink;
+				--color-4: #fdd123;
+			}
+			div {
+				border: 1px double blue;
+			}
+			p {
+				border: 1px solid var(--color-1);
+			}
+			span {
+				border: 1px dashed var(--color-2);
+			}
+
+			ul {
+				display: flex;
+				border: 1px solid var(--color-3);
+				list-style: none;
+			}
+
+			ul > li {
+				border: 1px dashed var(--color-4);
+			}
+
+			.box {
+				box-sizing: border-box;
+				width: 350px;
+				height: 150px;
+				border: 5px solid black;
+			}
+
+			.inline span {
+				margin: 20px;
+				padding: 20px;
+				width: 80px;
+				height: 50px;
+				background-color: lightblue;
+				border: 2px solid blue;
+			}
+			.center-block {
+				margin: 0 auto;
+			}
+			.ghost-center {
+				/* height: 100px; */
+				position: relative;
+			}
+
+			.ghost-center::before {
+				content: ' ';
+				display: inline-block;
+				height: 100%;
+				width: 1%;
+				vertical-align: middle;
+			}
+
+			.ghost-center p {
+				display: inline-block;
+				width: 50%;
+				vertical-align: middle;
+				margin: 0;
+				padding: 20px;
+				background-color: bisque;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>盒子模型</h1>
+		<main>
+			<p>这是一个块级元素</p>
+			<span>行内元素1</span>
+			<span>行内元素1</span>
+			<span>行内元素1</span>
+			<div>
+				这是一个父级块<span>inline</span> <span>inline</span>
+				<p>这是一个块中块盒子</p>
+			</div>
+			<ul>
+				<li>inline 1</li>
+				<li>inline 2</li>
+				<li>inline 3</li>
+			</ul>
+
+			<section>
+				标准CSS模型
+				<div class="box"></div>
+			</section>
+			<section>
+				<p class="inline">
+					I am a paragraph and this is a <span>span</span> inside that
+					paragraph. A span is an inline element and so does not respect width
+					and height.
+				</p>
+			</section>
+
+			<section>
+				<h1>水平/垂直居中</h1>
+				<div>
+					<div class="center-block">block children</div>
+				</div>
+				<div class="ghost-center">
+					<p>
+						利用ghost t利用ghost tech实现多行居中利用ghost
+						tech实现多行居中利用ghost tech实现多行居中ech实现多行居中
+					</p>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

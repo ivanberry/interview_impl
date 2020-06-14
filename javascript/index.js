@@ -40,8 +40,8 @@
 
 // a.say.call2(b, 'Hi', new Date());
 
-new Promise((resolve) => {
-	mockAjax('getUserId', 1, (result) => {
-		resolve(result);
-	});
-}).then((result) => console.log(result));
+// new Promise((resolve) => {
+// 	mockAjax('getUserId', 1, (result) => {
+// 		resolve(result);
+// 	});
+// }).then((result) => console.log(result));

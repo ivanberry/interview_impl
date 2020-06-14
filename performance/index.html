@@ -5,6 +5,7 @@
 		<!-- <link rel="dns-prefetch" href="https://hips.hearstapps.com" /> -->
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
 		<!-- <script defer src="./300ms-delay.js"></script> -->
+		<script defer src="./defer-script.js"></script>
 		<title>Performance</title>
 	</head>
 	<body>
@@ -18,17 +19,37 @@
 					src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=768:*"
 					alt="dog"
 				/>
-				<!-- <img src="./demo_img.png" alt="test image" /> -->
-				<!-- <img src="./demo_img.png" alt="test image" /> -->
-				<!-- <img src="./demo_img.png" alt="test image" /> -->
-				<!-- <img src="./demo_img.png" alt="test image" />
+				<img src="./demo_img.png" alt="test image" />
+				<img src="./demo_img.png" alt="test image" />
+				<img src="./demo_img.png" alt="test image" />
+				<!-- <!-- <img src="./demo_img.png" alt="test image" /> -->
 				<img src="./demo_img.png" alt="test image" />
 				<img src="./demo_img.png" alt="test image" />
 				<img src="./demo_img.png" alt="test image" />
 				<img src="./demo_img.png" alt="test image" />
 				<img src="./demo_img.png" alt="test image" />
-				<img src="./demo_img.png" alt="test image" /> -->
+				<img src="./demo_img.png" alt="test image" />
 			</div>
 		</section>
+		<script>
+			document.addEventListener('DOMContentLoaded', () =>
+				console.log('dom content loaded')
+			);
+
+			async function test() {
+				return new Promise((_, reject) => {
+					reject(4);
+				});
+			}
+
+			(async () => {
+				try {
+					var a = await test();
+					console.log(a);
+				} catch (error) {
+					console.log(error);
+				}
+			})();
+		</script>
 	</body>
 </html>
